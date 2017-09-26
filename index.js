@@ -46,7 +46,7 @@ module.exports = function(options){
     var extname = path.extname(file.path),
         parser = options.parsers[extname];
 
-    if (!parser) return cb(null, file);
+    if (options.exc && ~file.path.indexOf(options.exc) || !parser) return cb(null, file);
 
     return parser(file, cb, options);
   }
